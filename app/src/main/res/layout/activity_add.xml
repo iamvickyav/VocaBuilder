@@ -7,49 +7,57 @@
 
     <EditText
         android:id="@+id/word"
-        android:layout_width="40dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:ems="10"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:hint="Enter the word"
+        android:hint="@string/enter_the_word"
         android:text="" />
 
     <EditText
         android:id="@+id/meaning"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/word"
         android:ems="10"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:hint="Enter the meaning"
+        android:hint="@string/enter_the_meaning"
         android:text="" />
 
     <EditText
         android:id="@+id/tamil"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/meaning"
         android:ems="10"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:hint="Enter Tamil meaning"
+        android:hint="@string/enter_tamil_meaning"
         android:text="" />
 
     <EditText
         android:id="@+id/example"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tamil"
         android:ems="10"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_centerHorizontal="true"
         android:inputType="textPersonName"
-        android:hint="Example, If any"
+        android:hint="@string/example_if_any"
         android:text="" />
 
     <Button
@@ -59,6 +67,6 @@
         android:layout_below="@id/example"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="Add to DB" />
+        android:text="@string/add_to_db" />
 
 </RelativeLayout>

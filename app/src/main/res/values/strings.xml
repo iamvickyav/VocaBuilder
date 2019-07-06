@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">VocaBuilder</string>
+    <string name="vocabuilder">VocaBuilder</string>
+    <string name="view">View</string>
+    <string name="add">Add</string>
+    <string name="enter_the_word">Enter the word</string>
+    <string name="enter_the_meaning">Enter the meaning</string>
+    <string name="enter_tamil_meaning">Enter Tamil meaning</string>
+    <string name="example_if_any">Example, If any</string>
+    <string name="add_to_db">Add to DB</string>
 </resources>

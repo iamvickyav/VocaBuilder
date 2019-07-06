@@ -15,7 +15,7 @@
         android:layout_gravity="top"
         android:layout_marginTop="100dp"
         android:textSize="30sp"
-        android:text="VocaBuilder" />
+        android:text="@string/vocabuilder" />
 
 
     <LinearLayout
@@ -28,17 +28,19 @@
             android:id="@+id/viewButton"
             android:gravity="center"
             android:layout_width="0dp"
+            android:layout_margin="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="View" />
+            android:text="@string/view" />
 
         <Button
             android:id="@+id/addButton"
             android:gravity="center"
             android:layout_width="0dp"
+            android:layout_margin="30dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Add" />
+            android:text="@string/add" />
 
     </LinearLayout>
 
