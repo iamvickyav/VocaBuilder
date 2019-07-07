@@ -13,12 +13,12 @@
         android:layout_margin="30dp"
         android:text="@string/show_data" />
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/list_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/showData" >
-    </ListView>
+    </ExpandableListView>
 
     <ProgressBar
         android:id="@+id/progressBar"
