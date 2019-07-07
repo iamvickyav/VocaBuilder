@@ -4,4 +4,5 @@ public class Lexicon {
     public String example;
     public String meaning;
     public String tamil;
+    public String word;
 }

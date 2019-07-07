@@ -73,6 +73,7 @@ public class AddActivity extends AppCompatActivity {
         lexicon.meaning = meaning.getText().toString();
         lexicon.tamil = tamil.getText().toString();
         lexicon.example = example.getText().toString();
+        lexicon.word = word.getText().toString();
         return lexicon;
     }
 }
