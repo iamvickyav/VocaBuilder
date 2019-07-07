@@ -1,12 +1,13 @@
 package com.iamvickyav.vocabuilder;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,10 @@ import static com.iamvickyav.vocabuilder.util.VocaConstants.COLLECTION;
 public class ViewActivity extends AppCompatActivity {
 
     Button showData;
-    List<String> documentId = new ArrayList<>();
+    List<String> documentId;
     ListView listView;
+    ProgressBar progressBar;
+    ArrayAdapter<String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +38,57 @@ public class ViewActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
         showData = findViewById(R.id.showData);
+        progressBar = findViewById(R.id.progressBar);
 
         showData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                Toast.makeText(getApplicationContext(), "Loading..", Toast.LENGTH_SHORT).show();
-
-                db.collection(COLLECTION)
-                        .get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    for (QueryDocumentSnapshot document : task.getResult()) {
-                                        documentId.add(document.getId());
-                                    }
-                                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.listview_element, documentId);
-                                    listView.setAdapter(arrayAdapter);
-                                } else {
-                                    Log.d("SEARCH", "Error getting documents: ", task.getException());
-                                }
-                            }
-                        });
-
+                documentId = new ArrayList<>();
+                new AsyncFetch().execute();
             }
         });
+    }
+
+    void displayListView() {
+        arrayAdapter = new ArrayAdapter<>(getApplicationContext(), R.layout.listview_element, documentId);
+        listView.setAdapter(arrayAdapter);
+    }
+
+    class AsyncFetch extends AsyncTask<Void, Void, Void> {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            db.collection(COLLECTION)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    documentId.add(document.getId());
+                                }
+                                Log.d("AsyncFetch", "Fetch Success " + documentId.size());
+                                postFetch();
+                            } else {
+                                Log.e("AsyncFetch", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+            return null;
+        }
+
+       private void postFetch(){
+           progressBar.setVisibility(View.GONE);
+           displayListView();
+       }
     }
 }
