@@ -1,20 +1,25 @@
 package com.iamvickyav.vocabuilder;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.iamvickyav.vocabuilder.model.Lexicon;
 
-import static com.iamvickyav.vocabuilder.util.VocaConstants.*;
+import static com.iamvickyav.vocabuilder.util.VocaConstants.ADD_SUCCESSFULL;
+import static com.iamvickyav.vocabuilder.util.VocaConstants.COLLECTION;
+import static com.iamvickyav.vocabuilder.util.VocaConstants.CONNECTION_ISSUE;
+import static com.iamvickyav.vocabuilder.util.VocaConstants.WORD_MANDATORY;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -31,6 +36,7 @@ public class AddActivity extends AppCompatActivity {
         tamil = findViewById(R.id.tamil);
         example = findViewById(R.id.example);
         addToDB = findViewById(R.id.addToDB);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addToDB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +65,19 @@ public class AddActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(AddActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void clearInputBoxes() {

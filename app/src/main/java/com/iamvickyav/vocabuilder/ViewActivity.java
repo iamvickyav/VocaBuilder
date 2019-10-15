@@ -1,10 +1,11 @@
 package com.iamvickyav.vocabuilder;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ProgressBar;
 
@@ -27,30 +28,36 @@ import static com.iamvickyav.vocabuilder.util.VocaConstants.COLLECTION;
 
 public class ViewActivity extends AppCompatActivity {
 
-    Button showData;
     ExpandableListView listView;
     ExpandableListAdapter listAdapter;
     ProgressBar progressBar;
-    List<String> listData;
-    HashMap<String, List<String>> subListData;
+    List<String> listData = new ArrayList<>();
+    HashMap<String, List<String>> subListData = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         listView = findViewById(R.id.list_view);
-        showData = findViewById(R.id.showData);
         progressBar = findViewById(R.id.progressBar);
 
-        showData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listData = new ArrayList<>();
-                subListData = new HashMap<>();
-                new AsyncFetch().execute();
-            }
-        });
+        new AsyncFetch().execute();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(ViewActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     void displayListView() {
