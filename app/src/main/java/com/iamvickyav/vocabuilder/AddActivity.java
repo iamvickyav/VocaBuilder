@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +27,7 @@ public class AddActivity extends AppCompatActivity {
 
     EditText word, meaning, tamil, example;
     Button addToDB;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +40,16 @@ public class AddActivity extends AppCompatActivity {
         example = findViewById(R.id.example);
         addToDB = findViewById(R.id.addToDB);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        progressBar = findViewById(R.id.progressBarAddPage);
 
         addToDB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String wordString = word.getText().toString();
                 if(!wordString.isEmpty()) {
+                    hideKeybord(view);
+                    progressBar.setVisibility(View.VISIBLE);
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     Lexicon lexicon = prepareData();
                     Task task = db.collection(COLLECTION).document(wordString.toUpperCase()).set(lexicon);
@@ -51,10 +58,12 @@ public class AddActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task task) {
                             if(task.isSuccessful()) {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getApplicationContext(),ADD_SUCCESSFULL, Toast.LENGTH_SHORT).show();
                                 clearInputBoxes();
                                 word.requestFocus();
                             } else {
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getApplicationContext(),CONNECTION_ISSUE, Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -78,6 +87,11 @@ public class AddActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void hideKeybord(View view) {
+        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     private void clearInputBoxes() {
