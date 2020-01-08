@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/enhanced_card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="#E9ECE9"
+    card_view:cardCornerRadius="20dp"
+    card_view:cardElevation="5dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardPreventCornerOverlap="false">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/card_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:fontFamily="@font/aladin"
+            android:text="ENGLISH WORD"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/card_word_meaning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_word"
+            android:layout_alignParentLeft="true"
+            android:text="MEANING"
+            android:paddingTop="20dp" />
+
+        <TextView
+            android:id="@+id/card_word_tamil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/card_word_meaning"
+            android:layout_alignParentLeft="true"
+            android:text="TAMIL MEANING"
+            android:paddingTop="20dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
