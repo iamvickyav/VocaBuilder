@@ -4,7 +4,7 @@
     android:id="@+id/enhanced_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="#E9ECE9"
+    card_view:cardBackgroundColor="#EAEFF7"
     card_view:cardCornerRadius="20dp"
     card_view:cardElevation="5dp"
     card_view:cardUseCompatPadding="true"
