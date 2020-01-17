@@ -9,4 +9,5 @@
     <string name="example_if_any">Example, If any</string>
     <string name="add_to_db">Add to DB</string>
     <string name="show_data">Show Data</string>
+    <string name="settings">Settings</string>
 </resources>
